@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>沉降线索评估 · 仓库周期分析</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="仓库周期分析首页"
+        ><span class="brand-mark">V</span
+        ><span>仓库周期分析<small>倾角 · 变形 · 沉降线索</small></span></a
+      >
+      <label class="sidebar-label" for="warehouse-picker">当前仓库</label>
+      <select id="warehouse-picker" aria-label="当前仓库"></select>
+      <button id="create-warehouse" class="sidebar-action">＋ 新建仓库</button>
+      <nav aria-label="主要功能">
+        <button data-view="overview" class="active">评估概览</button>
+        <button data-view="map">点位与区域</button>
+        <button data-view="trends">趋势与矩阵</button>
+        <button data-view="tracking">异常追踪</button>
+        <button data-view="archive">资料档案</button>
+        <button data-view="history">报告记录</button>
+        <button data-view="settings">仓库配置</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span> 周 / 月周期评估<small
+          >周期数据 · 可追溯报告</small
+        >
+      </div>
+    </aside>
+    <main>
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">WAREHOUSE INSIGHTS</span>
+          <h1 id="page-title">沉降线索评估</h1>
+        </div>
+        <button id="import-button" class="button secondary">导入 Excel</button>
+      </header>
+      <section class="assessment-bar" aria-label="报告生成条件">
+        <label
+          >评估周期<select id="cycle">
+            <option value="week">周评估 · 最近7天</option>
+            <option value="month">月评估 · 最近30天</option>
+          </select></label
+        >
+        <label>数据截止日期<input id="cutoff" type="date" /></label>
+        <button id="evaluate" class="button primary">生成评估</button>
+        <button id="export-pdf" class="button secondary" disabled>
+          导出完整 PDF
+        </button>
+        <span id="source-status" class="source-status"></span>
+      </section>
+      <div id="message" role="status" aria-live="polite" hidden></div>
+      <section id="content" aria-label="分析内容"></section>
+      <footer>
+        周期评估提供地面沉降调查线索。区域结果结合数据变化与点位配置，现场复测用于确认原因。
+      </footer>
+    </main>
+    <dialog id="warehouse-dialog">
+      <form id="warehouse-form">
+        <h2>新建仓库</h2>
+        <label
+          >仓库名称<input
+            name="name"
+            required
+            maxlength="100"
+            placeholder="例如：南区成品仓"
+        /></label>
+        <div class="dialog-actions">
+          <button type="button" class="button secondary" id="cancel-create">
+            取消</button
+          ><button class="button primary">创建</button>
+        </div>
+      </form>
+    </dialog>
+    <input id="excel-file" type="file" accept=".xlsx" hidden />
+    <input id="layout-file" type="file" accept="image/png,image/jpeg" hidden />
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
